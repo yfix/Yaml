@@ -55,7 +55,7 @@ class DumperTest extends \PHPUnit_Framework_TestCase
     {
         $this->dumper->setIndentation(7);
 
-$expected = <<<EOF
+        $expected = <<<EOF
 '': bar
 foo: '#bar'
 'foo''bar': {  }
@@ -96,8 +96,7 @@ EOF;
                     // TODO
                 } else {
                     eval('$expected = '.trim($test['php']).';');
-
-                    $this->assertEquals($expected, $this->parser->parse($this->dumper->dump($expected, 10)), $test['test']);
+                    $this->assertSame($expected, $this->parser->parse($this->dumper->dump($expected, 10)), $test['test']);
                 }
             }
         }
@@ -108,10 +107,10 @@ EOF;
         $expected = <<<EOF
 { '': bar, foo: '#bar', 'foo''bar': {  }, bar: [1, foo], foobar: { foo: bar, bar: [1, foo], foobar: { foo: bar, bar: [1, foo] } } }
 EOF;
-$this->assertEquals($expected, $this->dumper->dump($this->array, -10), '->dump() takes an inline level argument');
-$this->assertEquals($expected, $this->dumper->dump($this->array, 0), '->dump() takes an inline level argument');
+        $this->assertEquals($expected, $this->dumper->dump($this->array, -10), '->dump() takes an inline level argument');
+        $this->assertEquals($expected, $this->dumper->dump($this->array, 0), '->dump() takes an inline level argument');
 
-$expected = <<<EOF
+        $expected = <<<EOF
 '': bar
 foo: '#bar'
 'foo''bar': {  }
